@@ -61,7 +61,7 @@ export default async function RecruiterDashboardPage() {
 
       {jobs.length === 0 ? (
         <div className="card text-center text-sm text-gray-500">
-          You haven't posted any jobs yet.{" "}
+          You have not posted any jobs yet.{" "}
           <Link href="/jobs/new" className="text-brand-600 hover:underline">
             Post your first one
           </Link>

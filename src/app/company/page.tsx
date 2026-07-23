@@ -16,7 +16,7 @@ export default async function CompanyPage() {
       <div>
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Your company</h1>
         <p className="mt-1 text-sm text-gray-500">
-          Set this up once — it's attached automatically to every job you post.
+          Set this up once — it is attached automatically to every job you post.
         </p>
       </div>
       <CompanyForm company={company} />

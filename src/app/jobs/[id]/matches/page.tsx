@@ -43,7 +43,7 @@ export default async function JobMatchesPage({
 
       {matches.length === 0 ? (
         <div className="card text-center text-sm text-gray-500">
-          No matches yet. Click "Find matches" to score open-to-work candidates against this job.
+          No matches yet. Click &quot;Find matches&quot; to score open-to-work candidates against this job.
         </div>
       ) : (
         <div className="space-y-3">
