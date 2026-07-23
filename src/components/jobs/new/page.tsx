@@ -17,7 +17,7 @@ export default async function NewJobPage() {
           Save it as a draft to keep editing, or publish it now to make it visible right away.
         </p>
       </div>
-      <JobForm action={createJob} submitLabel="Create draft" showPublishOption />
+      <JobForm action={createJob} submitLabel="Create draft"/>
     </div>
   );
 }
