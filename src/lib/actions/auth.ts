@@ -19,7 +19,17 @@ const signInSchema = z.object({
 
 export type AuthState = { error?: string; success?: boolean };
 
-export async function signUp(_prevState: AuthState, formData: FormData): Promise<AuthState> {
+type Profile = {
+  id: string;
+  role: "candidate" | "recruiter";
+  full_name: string;
+  email?: string;
+};
+
+export async function signUp(
+  _prevState: AuthState,
+  formData: FormData
+): Promise<AuthState> {
   const parsed = signUpSchema.safeParse({
     fullName: formData.get("fullName"),
     email: formData.get("email"),
@@ -34,13 +44,14 @@ export async function signUp(_prevState: AuthState, formData: FormData): Promise
   const { fullName, email, password, role } = parsed.data;
   const supabase = await createClient();
 
-  // The DB trigger `handle_new_user` (supabase/auth-schema.sql) reads this
-  // metadata to create the `profiles` row automatically on signup.
   const { error } = await supabase.auth.signUp({
     email,
     password,
     options: {
-      data: { full_name: fullName, role },
+      data: {
+        full_name: fullName,
+        role,
+      },
       emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`,
     },
   });
@@ -52,7 +63,10 @@ export async function signUp(_prevState: AuthState, formData: FormData): Promise
   redirect(`/login?registered=true`);
 }
 
-export async function signIn(_prevState: AuthState, formData: FormData): Promise<AuthState> {
+export async function signIn(
+  _prevState: AuthState,
+  formData: FormData
+): Promise<AuthState> {
   const parsed = signInSchema.safeParse({
     email: formData.get("email"),
     password: formData.get("password"),
@@ -63,7 +77,10 @@ export async function signIn(_prevState: AuthState, formData: FormData): Promise
   }
 
   const supabase = await createClient();
-  const { error, data } = await supabase.auth.signInWithPassword(parsed.data);
+
+  const { error, data } = await supabase.auth.signInWithPassword(
+    parsed.data
+  );
 
   if (error) {
     return { error: "Invalid email or password" };
@@ -76,19 +93,30 @@ export async function signIn(_prevState: AuthState, formData: FormData): Promise
     .single();
 
   revalidatePath("/", "layout");
-  redirect(profile?.role === "recruiter" ? "/dashboard/recruiter" : "/dashboard/candidate");
+
+  redirect(
+    profile?.role === "recruiter"
+      ? "/dashboard/recruiter"
+      : "/dashboard/candidate"
+  );
 }
 
 export async function signOut() {
   const supabase = await createClient();
+
   await supabase.auth.signOut();
+
   revalidatePath("/", "layout");
   redirect("/login");
 }
 
-/** Fetches the logged-in user's profile. Returns null if not authenticated. */
-export async function getCurrentProfile() {
+/**
+ * Fetches the logged-in user's profile.
+ * Returns null if the user is not authenticated.
+ */
+export async function getCurrentProfile(): Promise<Profile | null> {
   const supabase = await createClient();
+
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -101,5 +129,5 @@ export async function getCurrentProfile() {
     .eq("id", user.id)
     .single();
 
-  return profile;
+  return profile as Profile | null;
 }
