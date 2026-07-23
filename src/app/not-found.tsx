@@ -10,7 +10,7 @@ export default function NotFound() {
           Nothing on the radar here
         </h1>
         <p className="mt-2 text-sm text-gray-500">
-          This page doesn't exist, or you don't have access to it.
+          This page does not exist, or you do not have access to it.
         </p>
         <Link href="/" className="btn-primary mt-6 inline-flex items-center gap-2">
           <ArrowLeft className="h-4 w-4" /> Back to home

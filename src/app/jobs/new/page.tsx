@@ -14,7 +14,7 @@ export default async function NewJobPage() {
       <div>
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Post a job</h1>
         <p className="mt-1 text-sm text-gray-500">
-          Saved as a draft first — you'll publish it from the next screen.
+          Saved as a draft first — you will publish it from the next screen.
         </p>
       </div>
       <JobForm action={createJob} submitLabel="Create draft" />

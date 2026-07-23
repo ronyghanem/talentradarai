@@ -84,7 +84,7 @@ export default function LandingPage() {
             </h3>
             <p className="mt-2 flex-1 text-sm text-gray-500">
               One profile, real matches. Track every application in one place, and get surfaced to
-              roles you'd never have found by browsing alone.
+              roles you would never have found by browsing alone.
             </p>
             <Link
               href="/register?role=candidate"
