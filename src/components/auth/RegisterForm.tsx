@@ -26,7 +26,7 @@ export function RegisterForm({ defaultRole }: { defaultRole: "candidate" | "recr
           )}
         >
           <User className="h-5 w-5" />
-          I'm a candidate
+          I am a candidate
         </button>
         <button
           type="button"
@@ -39,7 +39,7 @@ export function RegisterForm({ defaultRole }: { defaultRole: "candidate" | "recr
           )}
         >
           <Briefcase className="h-5 w-5" />
-          I'm hiring
+          I am hiring
         </button>
       </div>
       <input type="hidden" name="role" value={role} />

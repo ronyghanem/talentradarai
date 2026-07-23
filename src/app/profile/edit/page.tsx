@@ -30,7 +30,7 @@ export default async function EditProfilePage() {
       <div>
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Edit your profile</h1>
         <p className="mt-1 text-sm text-gray-500">
-          Keep this up to date — it's how recruiters and our AI matcher find you.
+          Keep this up to date — it is how recruiters and our AI matcher find you.
         </p>
       </div>
 

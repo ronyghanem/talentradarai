@@ -44,7 +44,7 @@ export function LoginForm({ registered }: { registered?: boolean }) {
       </button>
 
       <p className="text-center text-sm text-gray-500">
-        Don't have an account?{" "}
+        Do not have an account?{" "}
         <Link href="/register" className="font-medium text-brand-600 hover:underline">
           Sign up
         </Link>

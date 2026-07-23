@@ -51,7 +51,7 @@ export default async function JobDetailPage({
     <div className="mx-auto max-w-2xl space-y-6">
       {published && (
         <div className="rounded-md bg-green-50 px-3 py-2 text-sm text-green-700 dark:bg-green-950 dark:text-green-300">
-          Job published — it's now live on the public listing.
+          Job published — it is now live on the public listing.
         </div>
       )}
       <div className="card">
