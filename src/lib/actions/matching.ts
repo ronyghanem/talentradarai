@@ -83,11 +83,27 @@ export async function getMatchesForJob(jobId: string): Promise<MatchWithCandidat
 }
 
 /** Jobs the AI thinks fit the logged-in candidate, ranked by score. */
-export async function getMatchesForCandidate() {
+/** Jobs the AI thinks fit the logged-in candidate, ranked by score. */
+type MatchForCandidate = {
+  id: string;
+  job_id: string;
+  candidate_id: string;
+  score: number;
+  reasoning?: string;
+  job?: {
+    id: string;
+    title: string;
+    description?: string;
+  };
+};
+
+export async function getMatchesForCandidate(): Promise<MatchForCandidate[]> {
   const supabase = await createClient();
+
   const {
     data: { user },
   } = await supabase.auth.getUser();
+
   if (!user) return [];
 
   const { data } = await supabase
@@ -97,5 +113,5 @@ export async function getMatchesForCandidate() {
     .order("score", { ascending: false })
     .limit(20);
 
-  return data ?? [];
+  return (data as MatchForCandidate[]) ?? [];
 }
